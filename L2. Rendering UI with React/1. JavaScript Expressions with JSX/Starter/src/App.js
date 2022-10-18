@@ -1,5 +1,7 @@
 import logo from "./logo192.png";
+import React from "react";
 import "./App.css";
+
 
 const App = () => {
   const name = "React";
@@ -13,7 +15,16 @@ const App = () => {
   const aboutReact = (facts) =>
     `Release date: ${facts.releaseDate}. Language: ${facts.releaseDate}. License: ${facts.license}.`;
 
-  return <div className="container"></div>;
+//   const listItems = facts.map((fact) =>
+//   <li>{fact}</li>
+// );
+  return <div className="container">
+    <img src={logo} alt="React Logo" />
+    <h2>React</h2>
+    <div>{aboutReact(facts)}</div>
+    {/* <ul>{listItems}</ul> */}
+  </div>;
 };
 
 export default App;
+
