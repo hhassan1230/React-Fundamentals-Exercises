@@ -93,6 +93,15 @@ const movies = {
   },
 };
 
+const getUserMovie = (id) => {
+
+}
+
+const usersFaves = Object.keys(users).map((userKey)=>(
+  
+))
+
+
 const App = () => {
   return (
     <div>
@@ -101,6 +110,9 @@ const App = () => {
         <h1 className="App-title">ReactND - Coding Practice</h1>
       </header>
       <h2>Favorite Movies</h2>
+      <div>
+        <ul>{usersFaves}</ul>
+      </div>
     </div>
   );
 };
