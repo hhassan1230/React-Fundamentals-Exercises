@@ -93,12 +93,17 @@ const movies = {
   },
 };
 
-const getUserMovie = (id) => {
 
-}
+const getUserMovie = (id) => 
+// filter profiles to match the given id to id given  
+profiles.filter(profile => profile.userID == id).map((filteredProfile) => ( 
+   movies[filteredProfile.favoriteMovieID].name
+))
 
-const usersFaves = Object.keys(users).map((userKey)=>(
-  
+const usersFaves = Object.keys(users).map((userKey) => (
+  <li key={userKey}>
+    {`${users[userKey].name}'s favorite movie is ${getUserMovie(users[userKey].id)}.`}
+  </li>
 ))
 
 
