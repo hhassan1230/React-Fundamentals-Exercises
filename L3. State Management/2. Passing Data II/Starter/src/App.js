@@ -93,6 +93,22 @@ const movies = {
   },
 };
 
+const GetUsers = (movieId) => profiles.filter((filteredProfile) =>  
+  filteredProfile.favoriteMovieID.toString() === movieId.toString() 
+)
+.map(filteredProfile => 
+   users[filteredProfile.userID].name
+
+)
+
+const newMoviesObj = Object.keys(movies).map((movieKeyID) => {
+  return {
+    id: movies[movieKeyID].id,
+    mName: movies[movieKeyID].name,
+    users: GetUsers(movies[movieKeyID].id),
+  }
+})
+
 const App = () => {
   return (
     <div className="App">
@@ -101,6 +117,21 @@ const App = () => {
         <h1 className="App-title">ReactND - Coding Practice</h1>
       </header>
       <h2>How Popular is Your Favorite Movie?</h2>
+      
+      <ul>
+        {newMoviesObj.map((movieOjb) => 
+        <li>{movieOjb.mName}
+          {movieOjb.users.length > 0 ? 
+          <ul>
+           {movieOjb.users.map(user=> <li> {user}</li>)}   
+          </ul> : ` has not been favorited`}
+        
+        </li>
+        
+        )}
+      </ul>
+
+
     </div>
   );
 };
