@@ -93,20 +93,36 @@ const movies = {
   },
 };
 
-const GetUsers = (movieId) => profiles.filter((filteredProfile) =>  
-  filteredProfile.favoriteMovieID.toString() === movieId.toString() 
+const getUsers = (movieId) => profiles.filter((filteredProfile) =>  
+// if movieid matches the movie that's been favorited...
+filteredProfile.favoriteMovieID == movies[movieId].id
 )
 .map(filteredProfile => 
-   users[filteredProfile.userID].name
-
-)
+  // return user name who favorited the movie.
+  // users[filteredProfile.id]
+ users[filteredProfile.userID].name
+);
 
 const newMoviesObj = Object.keys(movies).map((movieKeyID) => {
-  return {
-    id: movies[movieKeyID].id,
-    mName: movies[movieKeyID].name,
-    users: GetUsers(movies[movieKeyID].id),
-  }
+// create a obj to list of all movies
+// if movie key isn't included yet, add it else, grab any names that favorited that movie
+console.log( {
+  id: movies[movieKeyID].id,
+  movieName: movies[movieKeyID].name,
+  userList: getUsers(movieKeyID)
+
+ });
+console.log("Get users:");
+console.log(getUsers(movieKeyID))
+
+return(
+ {
+  id: movies[movieKeyID].id,
+  movieName: movies[movieKeyID].name,
+  userList: getUsers(movieKeyID),
+ }
+)
+
 })
 
 const App = () => {
@@ -117,21 +133,23 @@ const App = () => {
         <h1 className="App-title">ReactND - Coding Practice</h1>
       </header>
       <h2>How Popular is Your Favorite Movie?</h2>
-      
-      <ul>
-        {newMoviesObj.map((movieOjb) => 
-        <li>{movieOjb.mName}
-          {movieOjb.users.length > 0 ? 
-          <ul>
-           {movieOjb.users.map(user=> <li> {user}</li>)}   
-          </ul> : ` has not been favorited`}
-        
-        </li>
-        
-        )}
-      </ul>
+         
+          <ul>{newMoviesObj.map((movie) =>
+            <li>{movie.movieName}
+                   {movie.userList.length > 0 ?
+                      <ul>
+                          {movie.userList.map(user =>
+                            <li> {user} </li>)}
+                      </ul> 
 
-
+                     
+                           : <ul>
+                            <li> No users favorited this movie</li>
+                           </ul>
+                    }
+            </li>
+            )}
+          </ul>
     </div>
   );
 };
