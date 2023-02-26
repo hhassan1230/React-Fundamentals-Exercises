@@ -1,19 +1,17 @@
-import { useState } from "react";
+// We need to import useState from react to use state in our component
+import { useState } from "react"; 
 import logo from "./logo.svg";
 import "./App.css";
 
 const App = () => {
-  const [text, setText] = useState("");
+  // We use useState to create a state variable called value and a function to update it called setValue
+  const [value, setValue] = useState(""); 
 
-  const HasChangeEvent = (value) => {
-    setText(value);
+  const handleChange = (event) => {
+    setValue(event.target.value);
   };
 
-  const showText = () => {
-    console.log(text);
-    return text;
-  };
-
+  // Used Controlled Components to update the value of the input field and just display the value of the input field
   return (
     <div className="App">
       <header className="App-header">
@@ -24,11 +22,11 @@ const App = () => {
         <input
           type="text"
           placeholder="Say Something"
-          value={text}
-          onChange={(event) => HasChangeEvent(event.target.value)}
+          value={value}
+          onChange={handleChange}
         />
         <p className="echo">Echo:</p>
-        <p>{showText()}</p>
+        <p>{value}</p>
       </div>
     </div>
   );
